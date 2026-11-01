@@ -74,9 +74,9 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto flex max-w-3xl flex-col items-center gap-6"
         >
-          <p className="font-display text-[clamp(1.18rem,4.4vw,1.75rem)] font-medium leading-[1.32] tracking-tight text-ink">
-            <span className="block">Fusion is the discipline.</span>
-            <span className="block mt-0.5">Combination is the craft.</span>
+          <p className="font-display text-[clamp(1.18rem,4.4vw,1.45rem)] md:text-[clamp(1.15rem,2.2vw,1.45rem)] font-medium leading-[1.32] md:leading-snug tracking-tight text-ink">
+            <span className="block md:inline">Fusion is the discipline. </span>
+            <span className="block mt-0.5 md:mt-0 md:inline">Combination is the craft.</span>
             <span className="block mt-1">
               Detail is where fusion proves <em className="italic">itself.</em>
             </span>
