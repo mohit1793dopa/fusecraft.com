@@ -1,5 +1,4 @@
 import git from "/tmp/git-test/node_modules/isomorphic-git/index.js";
-import http from "/tmp/git-test/node_modules/isomorphic-git/http/node/index.cjs";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -17,12 +16,55 @@ if (!token) {
   process.exit(1);
 }
 
+// High-performance streaming HTTP client using native Node fetch
+const customHttp = {
+  async request({ url, method = "GET", headers = {}, body }) {
+    let reqBody = undefined;
+    if (body) {
+      const chunks = [];
+      let total = 0;
+      for await (const chunk of body) {
+        chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+        total += chunk.length;
+      }
+      reqBody = Buffer.concat(chunks, total);
+      headers["content-length"] = reqBody.length.toString();
+    }
+
+    const res = await fetch(url, {
+      method,
+      headers,
+      body: reqBody,
+      duplex: reqBody ? "half" : undefined,
+    });
+
+    const ab = await res.arrayBuffer();
+    const resBuf = Buffer.from(ab);
+
+    const resHeaders = {};
+    for (const [k, v] of res.headers.entries()) {
+      resHeaders[k.toLowerCase()] = v;
+    }
+
+    return {
+      url: res.url,
+      method,
+      statusCode: res.status,
+      statusMessage: res.statusText,
+      headers: resHeaders,
+      body: (async function* () {
+        yield resBuf;
+      })(),
+    };
+  },
+};
+
 async function runPush() {
   console.log("Pushing main branch to https://github.com/mohit1793dopa/fusecraft.com.git ...");
   try {
     const res = await git.push({
       fs,
-      http,
+      http: customHttp,
       dir,
       url: "https://github.com/mohit1793dopa/fusecraft.com.git",
       ref: "main",
