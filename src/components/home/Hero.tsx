@@ -67,20 +67,34 @@ export function Hero() {
         </motion.div>
       </div>
 
-      <div className="relative z-10 flex min-h-[100svh] flex-col items-center justify-end px-5 pb-16 text-center md:px-8 md:pb-20">
+      <div className="relative z-10 flex min-h-[100svh] flex-col items-center justify-end px-4 pb-16 text-center sm:px-5 md:px-8 md:pb-20">
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto flex max-w-3xl flex-col items-center gap-6"
         >
-          <p className="font-display text-[clamp(1.18rem,4.4vw,1.45rem)] md:text-[clamp(1.15rem,2.2vw,1.45rem)] font-medium leading-[1.32] md:leading-snug tracking-tight text-ink">
-            <span className="block md:inline">Fusion is the discipline. </span>
-            <span className="block mt-0.5 md:mt-0 md:inline">Combination is the craft.</span>
-            <span className="block mt-1">
-              Detail is where fusion proves <em className="italic">itself.</em>
-            </span>
-          </p>
+          {/* Mobile view: 3 clear, intentional rows with larger font */}
+          <div className="block md:hidden">
+            <p className="font-display text-[clamp(1.15rem,4.5vw,1.35rem)] font-medium leading-[1.32] tracking-tight text-ink">
+              <span className="block">Fusion is the discipline.</span>
+              <span className="block mt-1">Combination is the craft.</span>
+              <span className="block mt-1">
+                Detail is where fusion proves <em className="italic">itself.</em>
+              </span>
+            </p>
+          </div>
+
+          {/* Desktop view: Exactly 2 rows as originally designed */}
+          <div className="hidden md:block">
+            <p className="font-display text-[clamp(1.15rem,2.2vw,1.45rem)] font-medium leading-snug tracking-tight text-ink">
+              <span className="block">Fusion is the discipline. Combination is the craft.</span>
+              <span className="block mt-1">
+                Detail is where fusion proves <em className="italic">itself.</em>
+              </span>
+            </p>
+          </div>
+
           <Link href="/work" className="btn-subtle">
             <span>Selected work</span>
             <span aria-hidden>→</span>
