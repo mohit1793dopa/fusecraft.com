@@ -112,19 +112,19 @@ function ProjectRow({
   return (
     <Link
       href={href}
-      className="group flex w-full cursor-pointer items-baseline justify-between gap-6 border-t border-line px-1 py-4 transition-opacity duration-200 last:border-b hover:opacity-45 sm:px-2 md:gap-10 md:px-3 md:py-5"
+      className="group flex w-full cursor-pointer flex-col gap-1.5 border-t border-line px-1 py-3.5 transition-opacity duration-200 last:border-b hover:opacity-45 sm:px-2 md:flex-row md:items-baseline md:justify-between md:gap-10 md:px-3 md:py-5"
       onMouseEnter={() => setModal({ active: true, index })}
       onMouseLeave={() => setModal({ active: false, index })}
     >
-      <div className="flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1 transition-transform duration-300 group-hover:translate-x-1.5">
-        <h3 className="m-0 font-display text-xl font-medium tracking-tight text-ink md:text-2xl lg:text-[1.75rem]">
+      <div className="flex min-w-0 flex-wrap items-baseline justify-between gap-x-3 gap-y-1 transition-transform duration-300 md:justify-start group-hover:translate-x-1.5">
+        <h3 className="m-0 font-display text-lg sm:text-xl font-medium tracking-tight text-ink md:text-2xl lg:text-[1.75rem]">
           {title}
         </h3>
-        <span className="text-[0.65rem] tracking-[0.14em] text-mocha/50 uppercase md:text-[0.7rem]">
+        <span className="text-[0.62rem] tracking-[0.14em] text-mocha/50 uppercase sm:text-[0.65rem] md:text-[0.7rem]">
           {tag}
         </span>
       </div>
-      <p className="shrink-0 text-right text-[0.7rem] tracking-[0.14em] text-mocha/55 uppercase transition-transform duration-300 group-hover:-translate-x-1.5 md:text-xs">
+      <p className="text-[0.65rem] tracking-[0.12em] text-mocha/55 uppercase transition-transform duration-300 group-hover:-translate-x-1.5 sm:text-[0.7rem] md:shrink-0 md:text-right md:text-xs">
         {label}
       </p>
     </Link>
