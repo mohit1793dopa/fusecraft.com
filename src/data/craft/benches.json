@@ -1,0 +1,42 @@
+{
+  "slug": "benches",
+  "title": "Benches",
+  "cover": "/images/browse-by-craft/benches.jpg",
+  "href": "/craft/benches",
+  "subcategories": [
+    {
+      "slug": "all",
+      "title": "All designs",
+      "designs": [
+        {
+          "slug": "modular-metal-bench",
+          "title": "Modular Metal & Wood Bench",
+          "main": "/images/craft/metal-furniture/modular-metal-bench/1.jpg",
+          "images": [
+            "/images/craft/metal-furniture/modular-metal-bench/1.jpg",
+            "/images/craft/metal-furniture/modular-metal-bench/2.jpg",
+            "/images/craft/metal-furniture/modular-metal-bench/3.jpg"
+          ]
+        },
+        {
+          "slug": "angular-metal-wood-bench",
+          "title": "Angular Metal & Timber Bench",
+          "main": "/images/craft/chairs/anguar-metal-wood-beench/main.jpg",
+          "images": [
+            "/images/craft/chairs/anguar-metal-wood-beench/main.jpg",
+            "/images/craft/chairs/anguar-metal-wood-beench/01.jpg"
+          ]
+        },
+        {
+          "slug": "wooden-outdoor-bench",
+          "title": "Wooden Outdoor Bench",
+          "main": "/images/craft/chairs/wooden-outdoor-bench/main.jpg",
+          "images": [
+            "/images/craft/chairs/wooden-outdoor-bench/main.jpg",
+            "/images/craft/chairs/wooden-outdoor-bench/01.jpg"
+          ]
+        }
+      ]
+    }
+  ]
+}

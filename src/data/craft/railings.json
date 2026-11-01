@@ -1,0 +1,47 @@
+{
+  "slug": "railings",
+  "title": "Railings",
+  "cover": "/images/browse-by-craft/railing-design.jpg",
+  "href": "/craft/railings",
+  "subcategories": [
+    {
+      "slug": "staircase-railings",
+      "title": "Staircase Railings",
+      "designs": [
+        {
+          "slug": "parametric-spiral-balustrade",
+          "title": "Parametric Spiral Balustrade",
+          "main": "/images/craft/railing-design/parametric-spiral-balustrade/main.jpg",
+          "images": [
+            "/images/craft/railing-design/parametric-spiral-balustrade/main.jpg",
+            "/images/craft/railing-design/parametric-spiral-balustrade/01.jpg",
+            "/images/craft/railing-design/parametric-spiral-balustrade/02.jpg"
+          ]
+        },
+        {
+          "slug": "helical-brass-railing",
+          "title": "Helical Brass & Timber Railing",
+          "main": "/images/craft/railing-design/helical-brass-railing/main.jpg",
+          "images": [
+            "/images/craft/railing-design/helical-brass-railing/main.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "balcony-and-mezzanine-railings",
+      "title": "Balcony & Mezzanine Railings",
+      "designs": [
+        {
+          "slug": "wave-mezzanine-railing",
+          "title": "Wave Form Mezzanine Railing",
+          "main": "/images/craft/railing-design/wave-mezzanine-railing/main.jpg",
+          "images": [
+            "/images/craft/railing-design/wave-mezzanine-railing/main.jpg",
+            "/images/craft/railing-design/wave-mezzanine-railing/01.jpg"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+<svg width="678" height="644" viewBox="0 0 678 644" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Variety Enterprises — Precision Architectural Monogram & Material Compass -->
+  <g transform="translate(339, 225)">
+    <!-- Outer Octagonal Architectural Ring -->
+    <circle cx="0" cy="0" r="115" stroke="#171616" stroke-width="3" stroke-opacity="0.25" fill="none" />
+    <circle cx="0" cy="0" r="125" stroke="#171616" stroke-width="1.5" stroke-dasharray="4 6" stroke-opacity="0.3" fill="none" />
+    
+    <!-- Geometric Interlocking "V" and "E" Icon -->
+    <!-- The Bold "V" Shape -->
+    <path d="M-65 -60 L-10 65 L0 65 L45 -40 L28 -40 L-5 40 L-48 -60 Z" fill="#171616" />
+    
+    <!-- The Interlocking "E" Structure -->
+    <!-- Top Arm -->
+    <rect x="-15" y="-60" width="75" height="17" rx="2" fill="#171616" />
+    <!-- Middle Arm (interlaced) -->
+    <rect x="5" y="-8" width="55" height="16" rx="2" fill="#8B4F35" />
+    <!-- Bottom Arm -->
+    <rect x="-15" y="44" width="75" height="17" rx="2" fill="#171616" />
+    <!-- Vertical Spine for E -->
+    <rect x="-15" y="-60" width="17" height="121" rx="2" fill="#171616" />
+    
+    <!-- Precision Crosshairs / Calipers Accent -->
+    <line x1="-135" y1="0" x2="-115" y2="0" stroke="#8B4F35" stroke-width="2.5" />
+    <line x1="115" y1="0" x2="135" y2="0" stroke="#8B4F35" stroke-width="2.5" />
+    <line x1="0" y1="-135" x2="0" y2="-115" stroke="#8B4F35" stroke-width="2.5" />
+    <line x1="0" y1="115" x2="0" y2="135" stroke="#8B4F35" stroke-width="2.5" />
+    
+    <!-- Small Corner Technical Marks -->
+    <circle cx="-85" cy="-85" r="3" fill="#6F5947" />
+    <circle cx="85" cy="-85" r="3" fill="#6F5947" />
+    <circle cx="-85" cy="85" r="3" fill="#6F5947" />
+    <circle cx="85" cy="85" r="3" fill="#6F5947" />
+  </g>
+
+  <!-- Typography -->
+  <!-- Main Brand Name -->
+  <text x="339" y="435" font-family="'GT Walsheim Trial', 'Space Grotesk', -apple-system, sans-serif" font-size="40" font-weight="700" letter-spacing="0.22em" text-anchor="middle" fill="#171616">
+    VARIETY
+  </text>
+  
+  <!-- Sub Name -->
+  <text x="339" y="475" font-family="'GT Walsheim Trial', 'Space Grotesk', -apple-system, sans-serif" font-size="22" font-weight="500" letter-spacing="0.32em" text-anchor="middle" fill="#6F5947">
+    ENTERPRISES
+  </text>
+  
+  <!-- Divider -->
+  <line x1="240" y1="495" x2="438" y2="495" stroke="#DDD6C7" stroke-width="1" />
+  
+  <!-- Category Description -->
+  <text x="339" y="520" font-family="'GT Walsheim Trial', 'Space Grotesk', -apple-system, sans-serif" font-size="12" font-weight="400" letter-spacing="0.28em" text-anchor="middle" fill="#896E59">
+    ARCHITECTURAL MATERIALS &amp; FITTINGS
+  </text>
+</svg>

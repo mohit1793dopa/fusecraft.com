@@ -1,0 +1,124 @@
+{
+  "slug": "accessories",
+  "title": "Accessories",
+  "cover": "/images/browse-by-craft/handles.jpg",
+  "href": "/craft/accessories",
+  "subcategories": [
+    {
+      "slug": "door-handles",
+      "title": "Door Handles & Pulls",
+      "designs": [
+        {
+          "slug": "ht-geometric-resin-pull",
+          "title": "HT Geometric Resin Pull",
+          "main": "/images/craft/handles/ht-geometric-resin-pull/1.jpg",
+          "images": [
+            "/images/craft/handles/ht-geometric-resin-pull/1.jpg",
+            "/images/craft/handles/ht-geometric-resin-pull/2.jpg",
+            "/images/craft/handles/ht-geometric-resin-pull/3.jpg"
+          ]
+        },
+        {
+          "slug": "entrance-portal-handle-detail",
+          "title": "Entrance Portal Handle Detail",
+          "main": "/images/craft/accessories/entrance-portal-handle-detail/1.jpg",
+          "images": [
+            "/images/craft/accessories/entrance-portal-handle-detail/1.jpg",
+            "/images/craft/accessories/entrance-portal-handle-detail/2.jpg"
+          ]
+        },
+        {
+          "slug": "kb-sculpted-door-pull",
+          "title": "KB Sculpted Brass & Wood Pull",
+          "main": "/images/craft/accessories/kb-sculpted-door-pull/1.jpg",
+          "images": [
+            "/images/craft/accessories/kb-sculpted-door-pull/1.jpg",
+            "/images/craft/accessories/kb-sculpted-door-pull/2.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "cabinet-and-wardrobe-handles",
+      "title": "Cabinet & Wardrobe Handles",
+      "designs": [
+        {
+          "slug": "hcc-sculpted-timber-pull",
+          "title": "Hcc Sculpted Timber Pull",
+          "main": "/images/craft/handles/hcc-sculpted-timber-pull/1.jpg",
+          "images": [
+            "/images/craft/handles/hcc-sculpted-timber-pull/1.jpg"
+          ]
+        },
+        {
+          "slug": "hcw-turned-cane-knobs",
+          "title": "HCw Turned Cane Knobs",
+          "main": "/images/craft/handles/hcw-cane-wardrobe-knob/1.jpg",
+          "images": [
+            "/images/craft/handles/hcw-cane-wardrobe-knob/1.jpg"
+          ]
+        },
+        {
+          "slug": "hh-heirloom-brass-pull",
+          "title": "HH Heirloom Brass Pull",
+          "main": "/images/craft/accessories/hh-heirloom-brass-pull/1.jpg",
+          "images": [
+            "/images/craft/accessories/hh-heirloom-brass-pull/1.jpg",
+            "/images/craft/accessories/hh-heirloom-brass-pull/2.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "cloths-hangers",
+      "title": "Traditional Hangers & Hooks",
+      "designs": [
+        {
+          "slug": "traditional-cloths-hanger",
+          "title": "Traditional Heritage Clothes Hanger",
+          "main": "/images/craft/accessories/traditional-cloths-hanger/1.jpg",
+          "images": [
+            "/images/craft/accessories/traditional-cloths-hanger/1.jpg",
+            "/images/craft/accessories/traditional-cloths-hanger/2.jpg",
+            "/images/craft/accessories/traditional-cloths-hanger/3.jpg",
+            "/images/craft/accessories/traditional-cloths-hanger/4.jpg",
+            "/images/craft/accessories/traditional-cloths-hanger/5.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "hanging-shelves",
+      "title": "Hanging Shelves",
+      "designs": [
+        {
+          "slug": "sculptural-hanging-shelf",
+          "title": "Bespoke Suspended Hanging Shelf",
+          "main": "/images/craft/accessories/sculptural-hanging-shelf/1.jpg",
+          "images": [
+            "/images/craft/accessories/sculptural-hanging-shelf/1.jpg",
+            "/images/craft/accessories/sculptural-hanging-shelf/2.jpg",
+            "/images/craft/accessories/sculptural-hanging-shelf/3.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "architectural-brackets",
+      "title": "Railing Holders & Brackets",
+      "designs": [
+        {
+          "slug": "architectural-railing-bracket",
+          "title": "Custom Sculptural Railing Bracket",
+          "main": "/images/craft/accessories/architectural-railing-bracket/1.jpg",
+          "images": [
+            "/images/craft/accessories/architectural-railing-bracket/1.jpg",
+            "/images/craft/accessories/architectural-railing-bracket/2.jpg",
+            "/images/craft/accessories/architectural-railing-bracket/3.jpg",
+            "/images/craft/accessories/architectural-railing-bracket/4.jpg"
+          ]
+        }
+      ]
+    }
+  ]
+}

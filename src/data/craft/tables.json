@@ -1,0 +1,119 @@
+{
+  "slug": "tables",
+  "title": "Tables",
+  "cover": "/images/browse-by-craft/tables.jpg",
+  "href": "/craft/tables",
+  "subcategories": [
+    {
+      "slug": "centre-tables",
+      "title": "Centre Tables",
+      "designs": [
+        {
+          "slug": "black-grey-center-table",
+          "title": "Black Grey Center Table",
+          "main": "/images/craft/tables/black-grey-center-table/main.jpg",
+          "images": [
+            "/images/craft/tables/black-grey-center-table/main.jpg",
+            "/images/craft/tables/black-grey-center-table/01.jpg",
+            "/images/craft/tables/black-grey-center-table/02.jpg",
+            "/images/craft/tables/black-grey-center-table/03.jpg"
+          ]
+        },
+        {
+          "slug": "frosted-wooden-center-table",
+          "title": "Frosted Wooden Center Table",
+          "main": "/images/craft/tables/frosted-wooden-center-table/main.jpg",
+          "images": [
+            "/images/craft/tables/frosted-wooden-center-table/main.jpg",
+            "/images/craft/tables/frosted-wooden-center-table/01.jpg",
+            "/images/craft/tables/frosted-wooden-center-table/02.jpg"
+          ]
+        },
+        {
+          "slug": "glass-centter-table",
+          "title": "Glass center Table",
+          "main": "/images/craft/tables/glass-centter-table/main.jpg",
+          "images": [
+            "/images/craft/tables/glass-centter-table/main.jpg",
+            "/images/craft/tables/glass-centter-table/01.jpg",
+            "/images/craft/tables/glass-centter-table/02.jpg"
+          ]
+        },
+        {
+          "slug": "marrble-table",
+          "title": "marble Table",
+          "main": "/images/craft/tables/marrble-table/main.jpg",
+          "images": [
+            "/images/craft/tables/marrble-table/main.jpg",
+            "/images/craft/tables/marrble-table/01.jpg",
+            "/images/craft/tables/marrble-table/02.jpg",
+            "/images/craft/tables/marrble-table/03.jpg"
+          ]
+        },
+        {
+          "slug": "organic-center-table",
+          "title": "Organic Center Table",
+          "main": "/images/craft/tables/organic-center-table/main.jpg",
+          "images": [
+            "/images/craft/tables/organic-center-table/main.jpg",
+            "/images/craft/tables/organic-center-table/01.jpg",
+            "/images/craft/tables/organic-center-table/02.jpg",
+            "/images/craft/tables/organic-center-table/03.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "corner-tables",
+      "title": "Corner Tables",
+      "designs": [
+        {
+          "slug": "corner-tables",
+          "title": "Corner Tables",
+          "main": "/images/craft/tables/corner-tables/main.jpg",
+          "images": [
+            "/images/craft/tables/corner-tables/main.jpg",
+            "/images/craft/tables/corner-tables/01.jpg",
+            "/images/craft/tables/corner-tables/02.jpg",
+            "/images/craft/tables/corner-tables/03.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "dining",
+      "title": "Dining",
+      "designs": [
+        {
+          "slug": "cafe-dining-red-square-table",
+          "title": "Cafe Dining Red Square Table",
+          "main": "/images/craft/tables/cafe-dining-red-square-table/main.jpg",
+          "images": [
+            "/images/craft/tables/cafe-dining-red-square-table/main.jpg",
+            "/images/craft/tables/cafe-dining-red-square-table/01.jpg",
+            "/images/craft/tables/cafe-dining-red-square-table/02.jpg"
+          ]
+        },
+        {
+          "slug": "cafe-tall-dining-table",
+          "title": "Cafe Tall Dining Table",
+          "main": "/images/craft/tables/cafe-tall-dining-table/main.jpg",
+          "images": [
+            "/images/craft/tables/cafe-tall-dining-table/main.jpg",
+            "/images/craft/tables/cafe-tall-dining-table/01.jpg"
+          ]
+        },
+        {
+          "slug": "grey-and-golden",
+          "title": "Grey & Golden",
+          "main": "/images/craft/tables/grey-and-golden/main.jpg",
+          "images": [
+            "/images/craft/tables/grey-and-golden/main.jpg",
+            "/images/craft/tables/grey-and-golden/01.jpg",
+            "/images/craft/tables/grey-and-golden/02.jpg"
+          ]
+        }
+      ]
+    }
+  ]
+}

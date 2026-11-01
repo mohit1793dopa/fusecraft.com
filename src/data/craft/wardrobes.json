@@ -1,0 +1,41 @@
+{
+  "slug": "wardrobes",
+  "title": "Wardrobes",
+  "cover": "/images/browse-by-craft/wardrobe-handles.jpg",
+  "href": "/craft/wardrobes",
+  "subcategories": [
+    {
+      "slug": "bespoke-wardrobes",
+      "title": "Bespoke Architectural Wardrobes",
+      "designs": [
+        {
+          "slug": "fidvi-architectural-wardrobe",
+          "title": "Fidvi Full-Height Architectural Wardrobe",
+          "main": "/images/craft/wardrobes/fidvi-architectural-wardrobe/1.jpg",
+          "images": [
+            "/images/craft/wardrobes/fidvi-architectural-wardrobe/1.jpg",
+            "/images/craft/wardrobes/fidvi-architectural-wardrobe/2.jpg",
+            "/images/craft/wardrobes/fidvi-architectural-wardrobe/3.jpg"
+          ]
+        },
+        {
+          "slug": "fluted-brass-dressing-wardrobe",
+          "title": "Fluted Brass & Timber Dressing Wardrobe",
+          "main": "/images/craft/wardrobes/fluted-brass-dressing-wardrobe/1.jpg",
+          "images": [
+            "/images/craft/wardrobes/fluted-brass-dressing-wardrobe/1.jpg",
+            "/images/craft/wardrobes/fluted-brass-dressing-wardrobe/2.jpg"
+          ]
+        },
+        {
+          "slug": "integrated-wardrobe-joinery-detail",
+          "title": "Integrated Wardrobe Joinery & Pull Detail",
+          "main": "/images/craft/wardrobes/integrated-wardrobe-joinery-detail/1.jpg",
+          "images": [
+            "/images/craft/wardrobes/integrated-wardrobe-joinery-detail/1.jpg"
+          ]
+        }
+      ]
+    }
+  ]
+}

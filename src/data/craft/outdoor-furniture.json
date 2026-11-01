@@ -1,0 +1,60 @@
+{
+  "slug": "outdoor-furniture",
+  "title": "Outdoor Furniture",
+  "cover": "/images/browse-by-craft/outdoor-furniture.jpg",
+  "href": "/craft/outdoor-furniture",
+  "subcategories": [
+    {
+      "slug": "outdoor-seating",
+      "title": "Outdoor Seating",
+      "designs": [
+        {
+          "slug": "green-chair",
+          "title": "Green Outdoor Chair",
+          "main": "/images/craft/outdoor-furniture/green-chair/1.jpg",
+          "images": [
+            "/images/craft/outdoor-furniture/green-chair/1.jpg",
+            "/images/craft/outdoor-furniture/green-chair/2.jpg",
+            "/images/craft/outdoor-furniture/green-chair/3.jpg"
+          ]
+        },
+        {
+          "slug": "metal-chair",
+          "title": "Wrought Iron Terrace Chair",
+          "main": "/images/craft/outdoor-furniture/metal-chair/1.jpg",
+          "images": [
+            "/images/craft/outdoor-furniture/metal-chair/1.jpg",
+            "/images/craft/outdoor-furniture/metal-chair/2.jpg",
+            "/images/craft/outdoor-furniture/metal-chair/3.jpg",
+            "/images/craft/outdoor-furniture/metal-chair/4.jpg"
+          ]
+        },
+        {
+          "slug": "white-chair",
+          "title": "White Bar Stool",
+          "main": "/images/craft/outdoor-furniture/white-chair/1.jpg",
+          "images": [
+            "/images/craft/outdoor-furniture/white-chair/1.jpg",
+            "/images/craft/outdoor-furniture/white-chair/2.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "tables-and-benches",
+      "title": "Tables & Benches",
+      "designs": [
+        {
+          "slug": "modular-metal-bench",
+          "title": "Modular Metal & Wood Outdoor Bench",
+          "main": "/images/craft/outdoor-furniture/modular-metal-bench/1.jpg",
+          "images": [
+            "/images/craft/outdoor-furniture/modular-metal-bench/1.jpg",
+            "/images/craft/outdoor-furniture/modular-metal-bench/2.jpg",
+            "/images/craft/outdoor-furniture/modular-metal-bench/3.jpg"
+          ]
+        }
+      ]
+    }
+  ]
+}

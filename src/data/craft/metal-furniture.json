@@ -1,0 +1,60 @@
+{
+  "slug": "metal-furniture",
+  "title": "Metal Furniture",
+  "cover": "/images/browse-by-craft/metal-furniture.jpg",
+  "href": "/craft/metal-furniture",
+  "subcategories": [
+    {
+      "slug": "metal-benches",
+      "title": "Metal Benches",
+      "designs": [
+        {
+          "slug": "modular-metal-bench",
+          "title": "Modular Metal & Wood Outdoor Bench",
+          "main": "/images/craft/metal-furniture/modular-metal-bench/1.jpg",
+          "images": [
+            "/images/craft/metal-furniture/modular-metal-bench/1.jpg",
+            "/images/craft/metal-furniture/modular-metal-bench/2.jpg",
+            "/images/craft/metal-furniture/modular-metal-bench/3.jpg"
+          ]
+        },
+        {
+          "slug": "anguar-metal-wood-beench",
+          "title": "Angular Metal Wood Bench",
+          "main": "/images/craft/chairs/anguar-metal-wood-beench/main.jpg",
+          "images": [
+            "/images/craft/chairs/anguar-metal-wood-beench/main.jpg",
+            "/images/craft/chairs/anguar-metal-wood-beench/01.jpg"
+          ]
+        },
+        {
+          "slug": "wooden-outdoor-bench",
+          "title": "Wooden Outdoor Bench",
+          "main": "/images/craft/chairs/wooden-outdoor-bench/main.jpg",
+          "images": [
+            "/images/craft/chairs/wooden-outdoor-bench/main.jpg",
+            "/images/craft/chairs/wooden-outdoor-bench/01.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "metal-seating",
+      "title": "Metal Seating",
+      "designs": [
+        {
+          "slug": "sleek-metal-sofa",
+          "title": "Sleek Metal Sofa",
+          "main": "/images/craft/sofa/sleek-metal-sofa/main.jpg",
+          "images": [
+            "/images/craft/sofa/sleek-metal-sofa/main.jpg",
+            "/images/craft/sofa/sleek-metal-sofa/01.jpg",
+            "/images/craft/sofa/sleek-metal-sofa/02.jpg",
+            "/images/craft/sofa/sleek-metal-sofa/03.jpg",
+            "/images/craft/sofa/sleek-metal-sofa/04.jpg"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+<svg width="678" height="644" viewBox="0 0 678 644" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Stoneage Nagpur — Faceted Architectural Stone Emblem -->
+  <g transform="translate(339, 230)">
+    <!-- Outer faceted stone polygon -->
+    <!-- Top facet -->
+    <polygon points="0,-120 95,-65 0,-10 -95,-65" fill="#171616" fill-opacity="0.88" />
+    
+    <!-- Left vertical facet -->
+    <polygon points="-95,-65 0,-10 0,115 -95,60" fill="#252617" fill-opacity="0.95" />
+    
+    <!-- Right vertical facet -->
+    <polygon points="0,-10 95,-65 95,60 0,115" fill="#171616" />
+    
+    <!-- Cut inner facets / chiseled crystal vein -->
+    <polygon points="0,-10 60,-45 60,35 0,70" fill="#3E3F27" fill-opacity="0.25" stroke="#FFFFFF" stroke-width="1.5" stroke-opacity="0.6" />
+    <polygon points="0,-10 -60,-45 -60,35 0,70" fill="#FFFFFF" fill-opacity="0.08" stroke="#FFFFFF" stroke-width="1.5" stroke-opacity="0.4" />
+    
+    <!-- Chiseled central ridge -->
+    <line x1="0" y1="-120" x2="0" y2="115" stroke="#FFFFFF" stroke-width="2.5" stroke-opacity="0.8" />
+    
+    <!-- Stone cleavage lines -->
+    <line x1="-95" y1="-65" x2="95" y2="60" stroke="#FFFFFF" stroke-width="1.2" stroke-opacity="0.35" />
+    <line x1="-95" y1="60" x2="95" y2="-65" stroke="#FFFFFF" stroke-width="1.2" stroke-opacity="0.35" />
+    
+    <!-- Base shadow accent -->
+    <ellipse cx="0" cy="132" rx="85" ry="14" fill="#171616" fill-opacity="0.12" />
+  </g>
+
+  <!-- Brand Typography -->
+  <!-- Main Brand Name -->
+  <text x="339" y="440" font-family="'GT Walsheim Trial', 'Space Grotesk', -apple-system, sans-serif" font-size="44" font-weight="700" letter-spacing="0.22em" text-anchor="middle" fill="#171616">
+    STONEAGE
+  </text>
+  
+  <!-- Location / Sub-brand -->
+  <text x="339" y="480" font-family="'GT Walsheim Trial', 'Space Grotesk', -apple-system, sans-serif" font-size="20" font-weight="500" letter-spacing="0.36em" text-anchor="middle" fill="#6F5947">
+    NAGPUR
+  </text>
+  
+  <!-- Craft Subtitle -->
+  <text x="339" y="515" font-family="'GT Walsheim Trial', 'Space Grotesk', -apple-system, sans-serif" font-size="12" font-weight="400" letter-spacing="0.28em" text-anchor="middle" fill="#896E59">
+    ARCHITECTURAL NATURAL STONE
+  </text>
+  
+  <!-- Geometric decorative divider -->
+  <line x1="260" y1="496" x2="418" y2="496" stroke="#DDD6C7" stroke-width="1" />
+</svg>
