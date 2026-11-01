@@ -1,4 +1,4 @@
-import git from "/tmp/git-test/node_modules/isomorphic-git/index.js";
+import git from "/Users/jeena/.local/share/git-tools/node_modules/isomorphic-git/index.js";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
