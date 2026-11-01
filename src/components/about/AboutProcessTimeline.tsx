@@ -105,36 +105,68 @@ export function AboutProcessTimeline() {
   const progressHeight = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      const stepElements = stepsData.map((s) => ({
-        id: s.id,
-        el: document.getElementById(s.id),
-      }));
-
-      const scrollPosition = window.scrollY + window.innerHeight * 0.4;
-
-      for (let i = stepElements.length - 1; i >= 0; i--) {
-        const item = stepElements[i];
-        if (item.el) {
-          const top = item.el.offsetTop;
-          if (scrollPosition >= top) {
-            setActiveStepId(item.id);
-            break;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const container = containerRef.current;
+          if (!container) {
+            ticking = false;
+            return;
           }
-        }
+
+          const containerRect = container.getBoundingClientRect();
+          const triggerPoint = window.innerHeight * 0.4;
+
+          // Before reaching the container, default to step 1
+          if (containerRect.top > triggerPoint) {
+            setActiveStepId(stepsData[0].id);
+            ticking = false;
+            return;
+          }
+
+          // When scrolled to the bottom of the container
+          if (containerRect.bottom <= window.innerHeight * 0.75) {
+            setActiveStepId(stepsData[stepsData.length - 1].id);
+            ticking = false;
+            return;
+          }
+
+          let currentActiveId = stepsData[0].id;
+          for (const step of stepsData) {
+            const el = document.getElementById(step.id);
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              if (rect.top <= triggerPoint) {
+                currentActiveId = step.id;
+              }
+            }
+          }
+
+          setActiveStepId(currentActiveId);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, []);
 
   const scrollToStep = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
+      setActiveStepId(id);
       const yOffset = -120;
-      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
@@ -152,8 +184,9 @@ export function AboutProcessTimeline() {
                 return (
                   <button
                     key={step.id}
+                    type="button"
                     onClick={() => scrollToStep(step.id)}
-                    className={`group flex w-full items-center justify-between rounded-xl px-4 py-2.5 text-left text-[13.5px] transition-all duration-200 ${
+                    className={`group flex w-full cursor-pointer items-center justify-between rounded-xl px-4 py-2.5 text-left text-[13.5px] transition-all duration-200 ${
                       isActive
                         ? "bg-sand text-chestnut font-semibold shadow-xs"
                         : "text-mocha/80 font-medium hover:bg-sand/60 hover:text-ink"
