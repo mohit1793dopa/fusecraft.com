@@ -74,7 +74,7 @@ const workshopCategories: WorkshopCategory[] = [
       "Our finishing specialists hand-blend stain recipes and natural oil formulas in-house, achieving consistent color tonality across diverse timber batches. From velvety open-pore wood finishes that preserve tactile grain to multi-layered hand-burnished brass patinas, each surface is cured under controlled ventilation for exceptional scratch resistance and enduring architectural richness.",
     ],
     image: "/images/workshop/painting-polishing.png",
-    imageAlt: "Artisan spray finishing and polishing architectural surfaces in Fusecrafts workshop",
+    imageAlt: "Artisan using orange spray gun for precision finishing and polishing on chair in Fusecrafts workshop",
     details: "Climate-controlled multi-stage finishing & patinas",
   },
 ];
