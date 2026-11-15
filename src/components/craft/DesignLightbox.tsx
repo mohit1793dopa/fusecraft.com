@@ -6,6 +6,7 @@ import {
   SqueezeCarousel,
   type SqueezeSlide,
 } from "@/components/ui/carousel-squeeze";
+import { FramerMoveableThumbnails } from "@/components/ui/framer-moveable-thumbnails";
 
 type DesignLightboxProps = {
   open: boolean;
@@ -57,6 +58,16 @@ export function DesignLightbox({
         ),
       })),
     [images, title, count],
+  );
+
+  const thumbnailItems = useMemo(
+    () =>
+      images.map((src, i) => ({
+        id: `${src}-${i}`,
+        url: src,
+        title: `${title} — view ${i + 1}`,
+      })),
+    [images, title],
   );
 
   useEffect(() => {
@@ -165,31 +176,44 @@ export function DesignLightbox({
               className="mx-auto w-full max-w-[920px]"
               onClick={(e) => e.stopPropagation()}
             >
-              {count > 1 ? (
-                <SqueezeCarousel
-                  slides={slides}
-                  activeIndex={index}
-                  onActiveChange={onIndexChange}
-                  fitToImage
-                  maxHeight={maxCarouselHeight}
-                  gap={12}
-                  slatWidth={count >= 5 ? 40 : count >= 4 ? 48 : 56}
-                  radius={10}
-                  duration={800}
-                  hoverGrow
-                  autoplay={false}
-                  controls
-                />
-              ) : (
-                <div className="relative mx-auto flex max-h-[min(72vh,640px)] w-full items-center justify-center overflow-hidden rounded-[10px] bg-moss-ink/30 shadow-[0_24px_80px_rgba(0,0,0,0.45)]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={current}
-                    alt={title}
-                    className="max-h-[min(72vh,640px)] w-auto max-w-full object-contain"
+              {/* Desktop view: SqueezeCarousel */}
+              <div className="hidden md:block">
+                {count > 1 ? (
+                  <SqueezeCarousel
+                    slides={slides}
+                    activeIndex={index}
+                    onActiveChange={onIndexChange}
+                    fitToImage
+                    maxHeight={maxCarouselHeight}
+                    gap={12}
+                    slatWidth={count >= 5 ? 40 : count >= 4 ? 48 : 56}
+                    radius={10}
+                    duration={800}
+                    hoverGrow
+                    autoplay={false}
+                    controls
                   />
-                </div>
-              )}
+                ) : (
+                  <div className="relative mx-auto flex max-h-[min(72vh,640px)] w-full items-center justify-center overflow-hidden rounded-[10px] bg-moss-ink/30 shadow-[0_24px_80px_rgba(0,0,0,0.45)]">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={current}
+                      alt={title}
+                      className="max-h-[min(72vh,640px)] w-auto max-w-full object-contain"
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* Mobile view only: Large, prominent moveable thumbnails gallery */}
+              <div className="block md:hidden w-full">
+                <FramerMoveableThumbnails
+                  items={thumbnailItems}
+                  index={index}
+                  onIndexChange={onIndexChange}
+                  imageHeightClassName="h-[min(54vh,420px)]"
+                />
+              </div>
             </motion.div>
           </div>
         </motion.div>
