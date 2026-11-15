@@ -132,7 +132,7 @@ export function FramerMoveableThumbnails({
     if (naturalRatio < 0.95) {
       // Tall portrait / vertical image (e.g. dining chairs, lounge chairs, doors, stools, tall cabinets)
       // Expand height so the portrait image fills the screen vertically and looks BIG & PROMINENT
-      containerAspect = `${Math.max(0.68, naturalRatio)}`;
+      containerAspect = `${Math.max(0.70, Math.min(0.85, naturalRatio))}`;
       containerMaxH = 'min(66vh, 520px)';
     } else if (naturalRatio <= 1.15) {
       // Square or soft portrait image (e.g. 1:1, 4:5)
@@ -184,29 +184,45 @@ export function FramerMoveableThumbnails({
             }}
             style={{ x }}
           >
-            {activeItems.map((item) => (
-              <div
-                key={item.id}
-                className='shrink-0 w-full h-full flex items-center justify-center overflow-hidden'
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={item.url}
-                  alt={item.title || 'Gallery item'}
-                  onLoad={(e) => {
-                    const target = e.currentTarget;
-                    if (target.naturalWidth && target.naturalHeight) {
-                      const r = Number((target.naturalWidth / target.naturalHeight).toFixed(3));
-                      setAspectRatios((prev) => (prev[item.url] === r ? prev : { ...prev, [item.url]: r }));
-                    }
-                  }}
-                  className={`w-full h-full ${
-                    objectFit === 'contain' ? 'object-contain' : 'object-cover'
-                  } select-none pointer-events-none rounded-2xl`}
-                  draggable={false}
-                />
-              </div>
-            ))}
+            {activeItems.map((item) => {
+              const itemRatio =
+                aspectRatios[item.url] ||
+                (craftAspectRatios as Record<string, number>)[item.url] ||
+                (naturalRatio ?? 1);
+              const isItemPortrait = itemRatio < 1.05;
+
+              return (
+                <div
+                  key={item.id}
+                  className='shrink-0 w-full h-full flex items-center justify-center overflow-hidden'
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={item.url}
+                    alt={item.title || 'Gallery item'}
+                    onLoad={(e) => {
+                      const target = e.currentTarget;
+                      if (target.naturalWidth && target.naturalHeight) {
+                        const r = Number(
+                          (target.naturalWidth / target.naturalHeight).toFixed(3),
+                        );
+                        setAspectRatios((prev) =>
+                          prev[item.url] === r ? prev : { ...prev, [item.url]: r },
+                        );
+                      }
+                    }}
+                    className={`w-full h-full ${
+                      isItemPortrait
+                        ? 'object-cover scale-[1.04]'
+                        : objectFit === 'contain'
+                          ? 'object-contain'
+                          : 'object-cover'
+                    } select-none pointer-events-none rounded-2xl transition-transform duration-300`}
+                    draggable={false}
+                  />
+                </div>
+              );
+            })}
           </motion.div>
 
           {/* Navigation Controls */}
