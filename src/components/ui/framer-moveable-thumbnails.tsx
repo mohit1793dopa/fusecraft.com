@@ -1,7 +1,6 @@
 'use client';
 
 import {
-  AnimatePresence,
   animate,
   motion,
   useMotionTemplate,
@@ -10,6 +9,7 @@ import {
 } from 'motion/react';
 import React, { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import craftAspectRatios from '@/data/craft/imageAspectRatios.json';
 
 export const items = [
   {
@@ -26,81 +26,6 @@ export const items = [
     id: 3,
     url: 'https://cdn.21st.dev/assets/mirror/41/418af4c54ec899f6e14404033548eff30e17ac34f8a6ecd0fa386736664ab098.jpg',
     title: 'AUSIZE MAM',
-  },
-  {
-    id: 4,
-    url: 'https://cdn.21st.dev/assets/mirror/c7/c7f20f2629a31f8eed6f2f899ee64dbb41877d38685fffe5ac32bf84c8d3e16a.jpg',
-    title: 'RECLKTIKA',
-  },
-  {
-    id: 5,
-    url: 'https://cdn.21st.dev/assets/mirror/ed/ed52b4b14c1c72d64906e26b87ca6fe17c05ffcbc6f1acbde34e2b20eac0bb08.jpg',
-    title: 'SONYPOO',
-  },
-  {
-    id: 6,
-    url: 'https://cdn.21st.dev/assets/mirror/dd/dda80b9931d1000fe04a9d10825b26f793520ced11ae723cc58eefdc06737f8b.jpg',
-    title: 'DONM FLY',
-  },
-  {
-    id: 7,
-    url: 'https://cdn.21st.dev/assets/mirror/f7/f79f112518837fe538dc1b1efc0a3ff279a775fc4d718055b6b336025ffcaf6e.jpg',
-    title: 'Snowy Mountain Highway',
-  },
-  {
-    id: 8,
-    url: 'https://cdn.21st.dev/assets/mirror/5a/5adc94c01293cf73c8d91501c9ccc9adaff4dd7a89b147a18c8cb6c506015249.jpg',
-    title: 'FOGGY FOLS',
-  },
-  {
-    id: 9,
-    url: 'https://cdn.21st.dev/assets/mirror/05/05522fb6175f73d7dd288876f80520ea7cb93c38eded959ab917c5597250062d.jpg',
-    title: 'DIM DARKO',
-  },
-  {
-    id: 10,
-    url: 'https://cdn.21st.dev/assets/mirror/a4/a4f9f554055ad10c60c9eac9ec758197f508bb28cd2ad67b424afd5c3367683d.jpg',
-    title: 'BEALIVE',
-  },
-  {
-    id: 11,
-    url: 'https://cdn.21st.dev/assets/mirror/2d/2d2435801e1ceba95249f348f8338c7686f0e39f0d13232d2c2edcb2ef3aa1ca.jpg',
-    title: 'DOMEDOM ROME',
-  },
-  {
-    id: 12,
-    url: 'https://cdn.21st.dev/assets/mirror/72/726cc39ff592b894a8371166c54a3218a71f9ef320a5d29905480eb5aad919fe.jpg',
-    title: 'IKEIMON POVE',
-  },
-  {
-    id: 13,
-    url: 'https://cdn.21st.dev/assets/mirror/04/040e315414ec53eaa9cbd34cb87286eabc9bbeaa359af5e207a4f869d3f058f7.jpg',
-    title: 'Wildflower Mountain Meadow',
-  },
-  {
-    id: 14,
-    url: 'https://cdn.21st.dev/assets/mirror/c6/c68ec12652dd244b6f56558cafe0258ede7091e4e90f7c950310a4dd9e1d0863.jpg',
-    title: 'Mountain Valley Vista',
-  },
-  {
-    id: 15,
-    url: 'https://cdn.21st.dev/assets/mirror/1e/1ef7c67a36dda66b4ddb2a63efec1429ff24df9cd271ed636f0f20cd049d576f.jpg',
-    title: 'Rugged Mountain Terrain',
-  },
-  {
-    id: 16,
-    url: 'https://cdn.21st.dev/assets/mirror/f4/f46e259858c10ad6c5a525513af156da6333f05c7e8bf81b9b41ea13586f805e.jpg',
-    title: 'Mountain Wildflower Bloom',
-  },
-  {
-    id: 17,
-    url: 'https://cdn.21st.dev/assets/mirror/3d/3dff8b99f2c2ba06e55b2b0dbbbd57adcbbfb37b392c04424068fdbc3f6f3724.jpg',
-    title: 'Mountain River Rapids',
-  },
-  {
-    id: 18,
-    url: 'https://cdn.21st.dev/assets/mirror/7c/7cb8bdab8b5e0e31d921c82286d748020ff94d8fe4f3abde673733a93d78a57a.jpg',
-    title: 'Lush Mountain Valley',
   },
 ];
 
@@ -120,10 +45,11 @@ export interface FramerMoveableThumbnailsProps {
   index?: number;
   onIndexChange?: (index: number) => void;
   className?: string;
-  imageHeightClassName?: string;
+  adaptiveAspect?: boolean;
   aspectRatio?: string;
   objectFit?: 'contain' | 'cover';
   showControls?: boolean;
+  imageHeightClassName?: string;
 }
 
 export function FramerMoveableThumbnails({
@@ -131,8 +57,8 @@ export function FramerMoveableThumbnails({
   index: controlledIndex,
   onIndexChange,
   className = '',
-  imageHeightClassName = '',
-  aspectRatio = '3/2',
+  adaptiveAspect = true,
+  aspectRatio = 'auto',
   objectFit = 'contain',
   showControls = true,
 }: FramerMoveableThumbnailsProps) {
@@ -141,6 +67,31 @@ export function FramerMoveableThumbnails({
 
   const [uncontrolledIndex, setUncontrolledIndex] = useState<number>(0);
   const currentIndex = isControlled ? controlledIndex : uncontrolledIndex;
+
+  // Track dynamic aspect ratios of all images loaded
+  const [aspectRatios, setAspectRatios] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    activeItems.forEach((item) => {
+      if (!item.url) return;
+      const img = new window.Image();
+      img.src = item.url;
+      if (img.complete && img.naturalWidth) {
+        setAspectRatios((prev) => ({
+          ...prev,
+          [item.url]: Number((img.naturalWidth / img.naturalHeight).toFixed(3)),
+        }));
+      } else {
+        img.onload = () => {
+          setAspectRatios((prev) => ({
+            ...prev,
+            [item.url]: Number((img.naturalWidth / img.naturalHeight).toFixed(3)),
+          }));
+        };
+      }
+    });
+  }, [activeItems]);
 
   const updateIndex = (newIdx: number) => {
     const clamped = Math.max(0, Math.min(activeItems.length - 1, newIdx));
@@ -169,16 +120,45 @@ export function FramerMoveableThumbnails({
     }
   }, [currentIndex, x, isDragging]);
 
+  // Dynamically compute container aspect ratio based on whether the active image is portrait or landscape
+  const currentUrl = activeItems[currentIndex]?.url || '';
+  const staticRatio = (craftAspectRatios as Record<string, number>)[currentUrl];
+  const naturalRatio = aspectRatios[currentUrl] || staticRatio;
+
+  let containerAspect = aspectRatio !== 'auto' ? aspectRatio : '3/2';
+  let containerMaxH = '52vh';
+
+  if (adaptiveAspect && naturalRatio) {
+    if (naturalRatio < 0.95) {
+      // Tall portrait / vertical image (e.g. dining chairs, lounge chairs, doors, stools, tall cabinets)
+      // Expand height so the portrait image fills the screen vertically and looks BIG & PROMINENT
+      containerAspect = `${Math.max(0.68, naturalRatio)}`;
+      containerMaxH = 'min(66vh, 520px)';
+    } else if (naturalRatio <= 1.15) {
+      // Square or soft portrait image (e.g. 1:1, 4:5)
+      containerAspect = `${naturalRatio}`;
+      containerMaxH = 'min(58vh, 440px)';
+    } else {
+      // Wide landscape image (e.g. 3:2 beds, 16:9 tables/sofas)
+      containerAspect = `${Math.min(1.78, naturalRatio)}`;
+      containerMaxH = 'min(50vh, 380px)';
+    }
+  }
+
   return (
     <div className={`w-full ${className}`}>
       <div className='flex flex-col gap-3.5'>
-        {/* Main Carousel: Preserves landscape ratio, never crops */}
+        {/* Adaptive Main Carousel Card: Dynamically expands height for portrait chairs/items & fits landscape */}
         <div
-          className='relative overflow-hidden rounded-xl bg-black/40 shadow-2xl'
+          style={{
+            aspectRatio: containerAspect,
+            maxHeight: containerMaxH,
+          }}
+          className='relative mx-auto w-full overflow-hidden rounded-2xl bg-[#12130e] shadow-2xl border border-white/5 transition-[aspect-ratio,max-height] duration-300 ease-out flex items-center justify-center'
           ref={containerRef}
         >
           <motion.div
-            className='flex'
+            className='flex h-full w-full'
             drag='x'
             dragElastic={0.2}
             dragMomentum={false}
@@ -191,11 +171,11 @@ export function FramerMoveableThumbnails({
 
               let newIndex = currentIndex;
 
-              // If fast swipe, use velocity
+              // Fast swipe
               if (Math.abs(velocity) > 400) {
                 newIndex = velocity > 0 ? currentIndex - 1 : currentIndex + 1;
               }
-              // Otherwise use offset threshold (25% of container width)
+              // Threshold swipe (25% of container width)
               else if (Math.abs(offset) > containerWidth * 0.25) {
                 newIndex = offset > 0 ? currentIndex - 1 : currentIndex + 1;
               }
@@ -207,62 +187,73 @@ export function FramerMoveableThumbnails({
             {activeItems.map((item) => (
               <div
                 key={item.id}
-                style={{
-                  aspectRatio: aspectRatio !== 'auto' ? aspectRatio : undefined,
-                }}
-                className={`shrink-0 w-full ${imageHeightClassName} flex items-center justify-center overflow-hidden`}
+                className='shrink-0 w-full h-full flex items-center justify-center overflow-hidden'
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={item.url}
                   alt={item.title || 'Gallery item'}
+                  onLoad={(e) => {
+                    const target = e.currentTarget;
+                    if (target.naturalWidth && target.naturalHeight) {
+                      const r = Number((target.naturalWidth / target.naturalHeight).toFixed(3));
+                      setAspectRatios((prev) => (prev[item.url] === r ? prev : { ...prev, [item.url]: r }));
+                    }
+                  }}
                   className={`w-full h-full ${
                     objectFit === 'contain' ? 'object-contain' : 'object-cover'
-                  } select-none pointer-events-none rounded-xl`}
+                  } select-none pointer-events-none rounded-2xl`}
                   draggable={false}
                 />
               </div>
             ))}
           </motion.div>
 
-          {/* Navigation Buttons */}
+          {/* Navigation Controls */}
           {showControls && activeItems.length > 1 && (
             <>
               <motion.button
                 type='button'
                 disabled={currentIndex === 0}
-                onClick={() => updateIndex(currentIndex - 1)}
-                className={`absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition-transform z-10
-                  ${
-                    currentIndex === 0
-                      ? 'opacity-30 cursor-not-allowed bg-black/40 text-sand'
-                      : 'bg-sand/90 text-ink hover:scale-105 hover:bg-cream opacity-85 backdrop-blur-sm'
-                  }`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  updateIndex(currentIndex - 1);
+                }}
+                className={`absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition-all z-10 ${
+                  currentIndex === 0
+                    ? 'opacity-25 cursor-not-allowed bg-black/50 text-sand/40'
+                    : 'bg-sand text-ink hover:scale-105 hover:bg-cream opacity-90 backdrop-blur-sm'
+                }`}
                 aria-label="Previous image"
               >
-                <ChevronLeft className='w-5 h-5' />
+                <ChevronLeft className='w-5 h-5 -ml-0.5' />
               </motion.button>
 
               <motion.button
                 type='button'
                 disabled={currentIndex === activeItems.length - 1}
-                onClick={() => updateIndex(currentIndex + 1)}
-                className={`absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition-transform z-10
-                  ${
-                    currentIndex === activeItems.length - 1
-                      ? 'opacity-30 cursor-not-allowed bg-black/40 text-sand'
-                      : 'bg-sand/90 text-ink hover:scale-105 hover:bg-cream opacity-85 backdrop-blur-sm'
-                  }`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  updateIndex(currentIndex + 1);
+                }}
+                className={`absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition-all z-10 ${
+                  currentIndex === activeItems.length - 1
+                    ? 'opacity-25 cursor-not-allowed bg-black/50 text-sand/40'
+                    : 'bg-sand text-ink hover:scale-105 hover:bg-cream opacity-90 backdrop-blur-sm'
+                }`}
                 aria-label="Next image"
               >
-                <ChevronRight className='w-5 h-5' />
+                <ChevronRight className='w-5 h-5 -mr-0.5' />
               </motion.button>
             </>
           )}
 
           {/* Counter Badge */}
-          <div className='absolute bottom-3 left-3 z-10 rounded-full bg-moss-ink/75 px-2.5 py-1 text-[0.62rem] font-mono tracking-widest text-sand backdrop-blur-md'>
-            {String(currentIndex + 1).padStart(2, '0')} / {String(activeItems.length).padStart(2, '0')}
-          </div>
+          {activeItems.length > 1 && (
+            <div className='absolute bottom-3 left-3 z-10 rounded-full bg-moss-ink/80 px-2.5 py-1 text-[0.62rem] font-mono tracking-widest text-sand backdrop-blur-md shadow-xs'>
+              {String(currentIndex + 1).padStart(2, '0')} / {String(activeItems.length).padStart(2, '0')}
+            </div>
+          )}
         </div>
 
         {/* Moveable Thumbnails Strip */}
@@ -305,7 +296,10 @@ function Thumbnails({
           <motion.button
             key={item.id}
             type='button'
-            onClick={() => setIndex(i)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setIndex(i);
+            }}
             initial={false}
             animate={i === index ? 'active' : 'inactive'}
             variants={{
@@ -323,10 +317,11 @@ function Thumbnails({
             className={`h-full shrink-0 overflow-hidden rounded-md border transition-all ${
               i === index
                 ? 'border-chestnut shadow-md ring-1 ring-chestnut/60'
-                : 'border-line/40 opacity-70 hover:opacity-100'
+                : 'border-line/40 opacity-60 hover:opacity-100'
             }`}
             aria-label={`View slide ${i + 1}`}
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={item.url}
               alt={item.title || `Thumbnail ${i + 1}`}

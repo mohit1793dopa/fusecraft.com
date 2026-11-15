@@ -122,7 +122,7 @@ export function DesignLightbox({
             className="pointer-events-none absolute inset-[18%] z-[1] rounded-full bg-almond/10 blur-3xl"
           />
 
-          <div className="relative z-20 flex items-start justify-between gap-4 px-5 pt-5 sm:px-10 sm:pt-7 md:px-14 md:pt-8 lg:px-20">
+          <div className="relative z-20 flex items-start justify-between gap-4 px-4 pt-4 sm:px-10 sm:pt-7 md:px-14 md:pt-8 lg:px-20">
             <motion.div
               initial={reduce ? false : { opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -168,7 +168,7 @@ export function DesignLightbox({
           </div>
 
           {/* More side padding; carousel sized to image ratio */}
-          <div className="relative z-10 flex min-h-0 flex-1 items-center justify-center px-6 pb-8 sm:px-12 sm:pb-10 md:px-20 lg:px-28">
+          <div className="relative z-10 flex min-h-0 flex-1 items-center justify-center px-4 pb-6 sm:px-12 sm:pb-10 md:px-20 lg:px-28">
             <motion.div
               initial={reduce ? false : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -205,15 +205,14 @@ export function DesignLightbox({
                 )}
               </div>
 
-              {/* Mobile view only: Large, prominent moveable thumbnails gallery */}
+              {/* Mobile view only: Large, prominent moveable thumbnails gallery with adaptive portrait/landscape height */}
               <div className="block md:hidden w-full">
                 <FramerMoveableThumbnails
                   items={thumbnailItems}
                   index={index}
                   onIndexChange={onIndexChange}
-                  aspectRatio="3/2"
+                  adaptiveAspect={true}
                   objectFit="contain"
-                  imageHeightClassName="max-h-[50vh]"
                 />
               </div>
             </motion.div>
