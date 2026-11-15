@@ -122,7 +122,7 @@ export function DesignLightbox({
             className="pointer-events-none absolute inset-[18%] z-[1] rounded-full bg-almond/10 blur-3xl"
           />
 
-          <div className="relative z-20 flex items-start justify-between gap-4 px-4 pt-4 sm:px-10 sm:pt-7 md:px-14 md:pt-8 lg:px-20">
+          <div className="relative z-20 flex items-start justify-between gap-3 px-4 pt-3.5 sm:gap-4 sm:px-10 sm:pt-7 md:px-14 md:pt-8 lg:px-20">
             <motion.div
               initial={reduce ? false : { opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -130,13 +130,13 @@ export function DesignLightbox({
               className="min-w-0"
             >
               {subcategory ? (
-                <p className="text-[0.62rem] tracking-[0.2em] text-almond/60 uppercase">
+                <p className="text-[0.55rem] sm:text-[0.62rem] tracking-[0.18em] sm:tracking-[0.2em] text-almond/60 uppercase">
                   {subcategory}
                 </p>
               ) : null}
               <h2
                 id={labelId}
-                className="mt-1.5 font-display text-[1.65rem] leading-tight font-medium tracking-tight text-sand sm:text-3xl md:text-[2.25rem]"
+                className="mt-0.5 sm:mt-1.5 font-display text-[1.15rem] leading-tight font-medium tracking-tight text-sand sm:text-3xl md:text-[2.25rem]"
               >
                 {title}
               </h2>
@@ -146,16 +146,14 @@ export function DesignLightbox({
               ref={closeRef}
               type="button"
               onClick={onClose}
-              className="group flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-sand text-ink shadow-[0_8px_28px_rgba(0,0,0,0.35)] transition hover:bg-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-almond"
+              className="group flex h-9 w-9 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full bg-sand text-ink shadow-[0_8px_28px_rgba(0,0,0,0.35)] transition hover:bg-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-almond"
               aria-label="Close"
             >
               <svg
-                width="18"
-                height="18"
                 viewBox="0 0 18 18"
                 fill="none"
                 aria-hidden
-                className="transition-transform duration-300 group-hover:rotate-90"
+                className="h-3.5 w-3.5 sm:h-[18px] sm:w-[18px] transition-transform duration-300 group-hover:rotate-90"
               >
                 <path
                   d="M4.5 4.5l9 9M13.5 4.5l-9 9"
