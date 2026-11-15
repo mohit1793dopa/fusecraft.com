@@ -211,7 +211,9 @@ export function DesignLightbox({
                   items={thumbnailItems}
                   index={index}
                   onIndexChange={onIndexChange}
-                  imageHeightClassName="h-[min(54vh,420px)]"
+                  aspectRatio="3/2"
+                  objectFit="contain"
+                  imageHeightClassName="max-h-[50vh]"
                 />
               </div>
             </motion.div>

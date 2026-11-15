@@ -121,6 +121,8 @@ export interface FramerMoveableThumbnailsProps {
   onIndexChange?: (index: number) => void;
   className?: string;
   imageHeightClassName?: string;
+  aspectRatio?: string;
+  objectFit?: 'contain' | 'cover';
   showControls?: boolean;
 }
 
@@ -129,7 +131,9 @@ export function FramerMoveableThumbnails({
   index: controlledIndex,
   onIndexChange,
   className = '',
-  imageHeightClassName = 'h-[360px] sm:h-[420px]',
+  imageHeightClassName = '',
+  aspectRatio = '3/2',
+  objectFit = 'contain',
   showControls = true,
 }: FramerMoveableThumbnailsProps) {
   const activeItems = propItems && propItems.length > 0 ? propItems : items;
@@ -168,8 +172,11 @@ export function FramerMoveableThumbnails({
   return (
     <div className={`w-full ${className}`}>
       <div className='flex flex-col gap-3.5'>
-        {/* Main Carousel */}
-        <div className='relative overflow-hidden rounded-xl bg-moss-ink/20 shadow-2xl' ref={containerRef}>
+        {/* Main Carousel: Preserves landscape ratio, never crops */}
+        <div
+          className='relative overflow-hidden rounded-xl bg-black/40 shadow-2xl'
+          ref={containerRef}
+        >
           <motion.div
             className='flex'
             drag='x'
@@ -198,11 +205,19 @@ export function FramerMoveableThumbnails({
             style={{ x }}
           >
             {activeItems.map((item) => (
-              <div key={item.id} className={`shrink-0 w-full ${imageHeightClassName} flex items-center justify-center`}>
+              <div
+                key={item.id}
+                style={{
+                  aspectRatio: aspectRatio !== 'auto' ? aspectRatio : undefined,
+                }}
+                className={`shrink-0 w-full ${imageHeightClassName} flex items-center justify-center overflow-hidden`}
+              >
                 <img
                   src={item.url}
                   alt={item.title || 'Gallery item'}
-                  className='w-full h-full object-cover rounded-xl select-none pointer-events-none'
+                  className={`w-full h-full ${
+                    objectFit === 'contain' ? 'object-contain' : 'object-cover'
+                  } select-none pointer-events-none rounded-xl`}
                   draggable={false}
                 />
               </div>
@@ -245,7 +260,7 @@ export function FramerMoveableThumbnails({
           )}
 
           {/* Counter Badge */}
-          <div className='absolute bottom-3 left-3 z-10 rounded-full bg-moss-ink/70 px-2.5 py-1 text-[0.62rem] font-mono tracking-widest text-sand backdrop-blur-md'>
+          <div className='absolute bottom-3 left-3 z-10 rounded-full bg-moss-ink/75 px-2.5 py-1 text-[0.62rem] font-mono tracking-widest text-sand backdrop-blur-md'>
             {String(currentIndex + 1).padStart(2, '0')} / {String(activeItems.length).padStart(2, '0')}
           </div>
         </div>
@@ -305,7 +320,11 @@ function Thumbnails({
                 marginRight: 0,
               },
             }}
-            className='h-full shrink-0 overflow-hidden rounded-md border border-line/40 transition-shadow'
+            className={`h-full shrink-0 overflow-hidden rounded-md border transition-all ${
+              i === index
+                ? 'border-chestnut shadow-md ring-1 ring-chestnut/60'
+                : 'border-line/40 opacity-70 hover:opacity-100'
+            }`}
             aria-label={`View slide ${i + 1}`}
           >
             <img
