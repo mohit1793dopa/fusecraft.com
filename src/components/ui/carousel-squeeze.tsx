@@ -16,6 +16,7 @@ import {
   type ReactNode,
 } from "react";
 import { cn } from "@/lib/utils";
+import craftAspectRatios from "@/data/craft/imageAspectRatios.json";
 
 export type SqueezeSlide = {
   id: string;
@@ -133,7 +134,8 @@ export function SqueezeCarousel({
       const parent = el.parentElement;
       const available = parent?.clientWidth || el.clientWidth || 800;
       const slide = slides[active];
-      const ratio = (slide && ratios[slide.id]) || 3 / 4; // default portrait-ish
+      const staticRatio = slide ? (craftAspectRatios as Record<string, number>)[slide.image] : undefined;
+      const ratio = (slide && ratios[slide.id]) || (staticRatio ? 1 / staticRatio : 3 / 4); // default portrait-ish
       const slatsTotal =
         Math.max(0, count - 1) * slatWidth + Math.max(0, count - 1) * gap;
       const openW = Math.max(160, available - slatsTotal);
@@ -147,7 +149,7 @@ export function SqueezeCarousel({
       }
 
       // Floor so short landscape shots don’t go tiny
-      h = Math.max(h, 280);
+      h = Math.max(h, 300);
       if (h > maxHeight) h = maxHeight;
 
       setTrackHeight(Math.round(h));
@@ -242,7 +244,10 @@ export function SqueezeCarousel({
               onMouseEnter={() => {
                 if (hoverGrow && !isOpen) setActive(i);
               }}
-              className="group relative h-full min-w-0 overflow-hidden bg-moss-ink/40 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-almond"
+              className={cn(
+                "group relative h-full min-w-0 overflow-hidden bg-moss-ink/40 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-almond transition-colors",
+                !isOpen ? "cursor-pointer hover:bg-moss-ink/50" : "cursor-default",
+              )}
               style={{
                 flexGrow: isOpen ? 1 : 0,
                 flexShrink: isOpen ? 1 : 0,
@@ -260,15 +265,15 @@ export function SqueezeCarousel({
                 className={cn(
                   "absolute inset-0 h-full w-full transition-transform duration-700",
                   // Open panel: contain so nothing is cut; slats stay cover for texture
-                  isOpen ? "object-contain scale-100" : "object-cover scale-110",
+                  isOpen ? "object-contain scale-100" : "object-cover scale-110 group-hover:scale-115",
                 )}
               />
 
               <div
                 aria-hidden
                 className={cn(
-                  "absolute inset-0 bg-moss-ink/40 transition-opacity duration-500",
-                  isOpen ? "opacity-0" : "opacity-100",
+                  "absolute inset-0 bg-moss-ink/40 transition-opacity duration-300",
+                  isOpen ? "opacity-0" : "opacity-100 group-hover:opacity-60",
                 )}
               />
 

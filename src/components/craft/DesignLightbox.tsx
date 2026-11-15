@@ -19,9 +19,9 @@ type DesignLightboxProps = {
 };
 
 function useMaxCarouselHeight() {
-  const [maxH, setMaxH] = useState(560);
+  const [maxH, setMaxH] = useState(640);
   useEffect(() => {
-    const update = () => setMaxH(Math.round(window.innerHeight * 0.68));
+    const update = () => setMaxH(Math.round(window.innerHeight * 0.76));
     update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
@@ -122,7 +122,7 @@ export function DesignLightbox({
             className="pointer-events-none absolute inset-[18%] z-[1] rounded-full bg-almond/10 blur-3xl"
           />
 
-          <div className="relative z-20 flex items-start justify-between gap-3 px-4 pt-3.5 sm:gap-4 sm:px-10 sm:pt-7 md:px-14 md:pt-8 lg:px-20">
+          <div className="relative z-20 flex items-start justify-between gap-3 px-4 pt-3.5 sm:gap-4 sm:px-10 sm:pt-5 md:px-12 md:pt-6 lg:px-16">
             <motion.div
               initial={reduce ? false : { opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -130,13 +130,13 @@ export function DesignLightbox({
               className="min-w-0"
             >
               {subcategory ? (
-                <p className="text-[0.55rem] sm:text-[0.62rem] tracking-[0.18em] sm:tracking-[0.2em] text-almond/60 uppercase">
+                <p className="text-[0.55rem] sm:text-[0.6rem] tracking-[0.18em] sm:tracking-[0.2em] text-almond/60 uppercase">
                   {subcategory}
                 </p>
               ) : null}
               <h2
                 id={labelId}
-                className="mt-0.5 sm:mt-1.5 font-display text-[1.15rem] leading-tight font-medium tracking-tight text-sand sm:text-3xl md:text-[2.25rem]"
+                className="mt-0.5 sm:mt-1 font-display text-[1.15rem] leading-tight font-medium tracking-tight text-sand sm:text-xl md:text-2xl lg:text-[1.65rem]"
               >
                 {title}
               </h2>
@@ -146,14 +146,14 @@ export function DesignLightbox({
               ref={closeRef}
               type="button"
               onClick={onClose}
-              className="group flex h-9 w-9 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full bg-sand text-ink shadow-[0_8px_28px_rgba(0,0,0,0.35)] transition hover:bg-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-almond"
+              className="group flex h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 shrink-0 items-center justify-center rounded-full bg-sand text-ink shadow-[0_8px_28px_rgba(0,0,0,0.35)] transition hover:bg-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-almond"
               aria-label="Close"
             >
               <svg
                 viewBox="0 0 18 18"
                 fill="none"
                 aria-hidden
-                className="h-3.5 w-3.5 sm:h-[18px] sm:w-[18px] transition-transform duration-300 group-hover:rotate-90"
+                className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-[18px] md:w-[18px] transition-transform duration-300 group-hover:rotate-90"
               >
                 <path
                   d="M4.5 4.5l9 9M13.5 4.5l-9 9"
@@ -166,12 +166,12 @@ export function DesignLightbox({
           </div>
 
           {/* More side padding; carousel sized to image ratio */}
-          <div className="relative z-10 flex min-h-0 flex-1 items-center justify-center px-4 pb-6 sm:px-12 sm:pb-10 md:px-20 lg:px-28">
+          <div className="relative z-10 flex min-h-0 flex-1 items-center justify-center px-4 pb-6 sm:px-8 sm:pb-8 md:px-12 md:pb-8 lg:px-16">
             <motion.div
               initial={reduce ? false : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.08, duration: 0.4 }}
-              className="mx-auto w-full max-w-[920px]"
+              className="mx-auto w-full max-w-[1240px]"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Desktop view: SqueezeCarousel */}
@@ -183,21 +183,21 @@ export function DesignLightbox({
                     onActiveChange={onIndexChange}
                     fitToImage
                     maxHeight={maxCarouselHeight}
-                    gap={12}
-                    slatWidth={count >= 5 ? 40 : count >= 4 ? 48 : 56}
-                    radius={10}
-                    duration={800}
-                    hoverGrow
+                    gap={14}
+                    slatWidth={count >= 5 ? 44 : count >= 4 ? 52 : 60}
+                    radius={12}
+                    duration={700}
+                    hoverGrow={false}
                     autoplay={false}
                     controls
                   />
                 ) : (
-                  <div className="relative mx-auto flex max-h-[min(72vh,640px)] w-full items-center justify-center overflow-hidden rounded-[10px] bg-moss-ink/30 shadow-[0_24px_80px_rgba(0,0,0,0.45)]">
+                  <div className="relative mx-auto flex max-h-[min(78vh,760px)] w-full items-center justify-center overflow-hidden rounded-[12px] bg-moss-ink/30 shadow-[0_24px_80px_rgba(0,0,0,0.45)]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={current}
                       alt={title}
-                      className="max-h-[min(72vh,640px)] w-auto max-w-full object-contain"
+                      className="max-h-[min(78vh,760px)] w-auto max-w-full object-contain"
                     />
                   </div>
                 )}
