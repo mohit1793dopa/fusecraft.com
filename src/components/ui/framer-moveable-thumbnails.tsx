@@ -59,7 +59,6 @@ export function FramerMoveableThumbnails({
   className = '',
   adaptiveAspect = true,
   aspectRatio = 'auto',
-  objectFit = 'contain',
   showControls = true,
 }: FramerMoveableThumbnailsProps) {
   const activeItems = propItems && propItems.length > 0 ? propItems : items;
@@ -70,6 +69,11 @@ export function FramerMoveableThumbnails({
 
   // Track dynamic aspect ratios of all images loaded
   const [aspectRatios, setAspectRatios] = useState<Record<string, number>>({});
+  const [containerWidth, setContainerWidth] = useState<number>(0);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  const x = useMotionValue(0);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -93,6 +97,36 @@ export function FramerMoveableThumbnails({
     });
   }, [activeItems]);
 
+  // Robust container width measurement using ResizeObserver to prevent subpixel peeking
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const updateWidth = () => {
+      if (containerRef.current) {
+        const w = containerRef.current.clientWidth;
+        if (w > 0) {
+          setContainerWidth(w);
+        }
+      }
+    };
+
+    updateWidth();
+    const ro = new ResizeObserver(updateWidth);
+    ro.observe(containerRef.current);
+    return () => ro.disconnect();
+  }, []);
+
+  // When index or container width changes, smoothly animate to the exact slide position
+  useEffect(() => {
+    if (!isDragging && containerWidth > 0) {
+      const targetX = -currentIndex * containerWidth;
+      animate(x, targetX, {
+        type: 'spring',
+        stiffness: 350,
+        damping: 32,
+      });
+    }
+  }, [currentIndex, containerWidth, isDragging, x]);
+
   const updateIndex = (newIdx: number) => {
     const clamped = Math.max(0, Math.min(activeItems.length - 1, newIdx));
     if (isControlled) {
@@ -101,24 +135,6 @@ export function FramerMoveableThumbnails({
       setUncontrolledIndex(clamped);
     }
   };
-
-  const [isDragging, setIsDragging] = useState<boolean>(false);
-  const containerRef = useRef<HTMLDivElement | null>(null);
-
-  const x = useMotionValue(0);
-
-  useEffect(() => {
-    if (!isDragging && containerRef.current) {
-      const containerWidth = containerRef.current.offsetWidth || 1;
-      const targetX = -currentIndex * containerWidth;
-
-      animate(x, targetX, {
-        type: 'spring',
-        stiffness: 300,
-        damping: 30,
-      });
-    }
-  }, [currentIndex, x, isDragging]);
 
   // Dynamically compute container aspect ratio based on whether the active image is portrait or landscape
   const currentUrl = activeItems[currentIndex]?.url || '';
@@ -140,7 +156,7 @@ export function FramerMoveableThumbnails({
       containerMaxH = 'min(58vh, 440px)';
     } else {
       // Wide landscape image (e.g. 3:2 beds, 16:9 tables/sofas)
-      containerAspect = `${Math.min(1.78, naturalRatio)}`;
+      containerAspect = `${Math.min(1.78, Math.max(1.33, naturalRatio))}`;
       containerMaxH = 'min(50vh, 380px)';
     }
   }
@@ -148,13 +164,13 @@ export function FramerMoveableThumbnails({
   return (
     <div className={`w-full ${className}`}>
       <div className='flex flex-col gap-3.5'>
-        {/* Adaptive Main Carousel Card: Dynamically expands height for portrait chairs/items & fits landscape */}
+        {/* Adaptive Main Carousel Card: Inset ring prevents border measurement mismatches */}
         <div
           style={{
             aspectRatio: containerAspect,
             maxHeight: containerMaxH,
           }}
-          className='relative mx-auto w-full overflow-hidden rounded-2xl bg-[#12130e] shadow-2xl border border-white/5 transition-[aspect-ratio,max-height] duration-300 ease-out flex items-center justify-center'
+          className='relative mx-auto w-full overflow-hidden rounded-2xl bg-[#12130e] shadow-2xl ring-1 ring-white/10 ring-inset transition-[aspect-ratio,max-height] duration-300 ease-out flex items-center justify-center'
           ref={containerRef}
         >
           <motion.div
@@ -165,7 +181,7 @@ export function FramerMoveableThumbnails({
             onDragStart={() => setIsDragging(true)}
             onDragEnd={(e, info) => {
               setIsDragging(false);
-              const containerWidth = containerRef.current?.offsetWidth || 1;
+              const width = containerWidth || containerRef.current?.clientWidth || 1;
               const offset = info.offset.x;
               const velocity = info.velocity.x;
 
@@ -176,7 +192,7 @@ export function FramerMoveableThumbnails({
                 newIndex = velocity > 0 ? currentIndex - 1 : currentIndex + 1;
               }
               // Threshold swipe (25% of container width)
-              else if (Math.abs(offset) > containerWidth * 0.25) {
+              else if (Math.abs(offset) > width * 0.25) {
                 newIndex = offset > 0 ? currentIndex - 1 : currentIndex + 1;
               }
 
@@ -184,45 +200,36 @@ export function FramerMoveableThumbnails({
             }}
             style={{ x }}
           >
-            {activeItems.map((item) => {
-              const itemRatio =
-                aspectRatios[item.url] ||
-                (craftAspectRatios as Record<string, number>)[item.url] ||
-                (naturalRatio ?? 1);
-              const isItemPortrait = itemRatio < 1.05;
-
-              return (
-                <div
-                  key={item.id}
-                  className='shrink-0 w-full h-full flex items-center justify-center overflow-hidden'
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={item.url}
-                    alt={item.title || 'Gallery item'}
-                    onLoad={(e) => {
-                      const target = e.currentTarget;
-                      if (target.naturalWidth && target.naturalHeight) {
-                        const r = Number(
-                          (target.naturalWidth / target.naturalHeight).toFixed(3),
-                        );
-                        setAspectRatios((prev) =>
-                          prev[item.url] === r ? prev : { ...prev, [item.url]: r },
-                        );
-                      }
-                    }}
-                    className={`w-full h-full ${
-                      isItemPortrait
-                        ? 'object-cover scale-[1.04]'
-                        : objectFit === 'contain'
-                          ? 'object-contain'
-                          : 'object-cover'
-                    } select-none pointer-events-none rounded-2xl transition-transform duration-300`}
-                    draggable={false}
-                  />
-                </div>
-              );
-            })}
+            {activeItems.map((item) => (
+              <div
+                key={item.id}
+                style={{
+                  width: containerWidth > 0 ? `${containerWidth}px` : '100%',
+                  minWidth: containerWidth > 0 ? `${containerWidth}px` : '100%',
+                  maxWidth: containerWidth > 0 ? `${containerWidth}px` : '100%',
+                }}
+                className='shrink-0 h-full flex items-center justify-center overflow-hidden'
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={item.url}
+                  alt={item.title || 'Gallery item'}
+                  onLoad={(e) => {
+                    const target = e.currentTarget;
+                    if (target.naturalWidth && target.naturalHeight) {
+                      const r = Number(
+                        (target.naturalWidth / target.naturalHeight).toFixed(3),
+                      );
+                      setAspectRatios((prev) =>
+                        prev[item.url] === r ? prev : { ...prev, [item.url]: r },
+                      );
+                    }
+                  }}
+                  className='w-full h-full object-cover select-none pointer-events-none rounded-2xl'
+                  draggable={false}
+                />
+              </div>
+            ))}
           </motion.div>
 
           {/* Navigation Controls */}
